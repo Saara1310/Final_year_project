@@ -39,7 +39,8 @@ interface Conversation {
 }
 
 function App() {
-  const [session, setSession] = useState<any>(null);
+  // TEMPORARY TEST SESSION
+  const [session, setSession] = useState<any>({ user: { id: "test-developer-user-123" } });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -79,24 +80,26 @@ function App() {
   }, []);
 
   // Manage Supabase Session
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
-      if (error) {
-        console.error("Supabase session error:", error.message);
-        // If the refresh token is invalid, clear the stale local storage session
-        supabase.auth.signOut().catch(e => console.error(e));
-      }
-      setSession(session);
-    });
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(({ data: { session }, error }) => {
+  //     if (error) {
+  //       console.error("Supabase session error:", error.message);
+  //       // If the refresh token is invalid, clear the stale local storage session
+  //       supabase.auth.signOut().catch(e => console.error(e));
+  //     }
+  //     setSession(session);
+  //   });
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+  //   const {
+  //     data: { subscription },
+  //   } = supabase.auth.onAuthStateChange((_event, session) => {
+  //     setSession(session);
+  //   });
 
-    return () => subscription.unsubscribe();
-  }, []);
+  //   return () => subscription.unsubscribe();
+  // }, []);
+
+  
 
   // Auto-scroll to the bottom of the chat
   const scrollToBottom = () => {
