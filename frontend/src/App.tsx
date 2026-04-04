@@ -40,7 +40,8 @@ interface Conversation {
 
 function App() {
   // TEMPORARY TEST SESSION
-  const [session, setSession] = useState<any>({ user: { id: "test-developer-user-123" } });
+  // Adding an underscore _ before setSession tells TypeScript "I know this is unused, please ignore it"
+  const [session, _setSession] = useState<any>({ user: { id: "test-developer-user-123" } });  
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
